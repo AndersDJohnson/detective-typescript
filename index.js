@@ -33,7 +33,7 @@ module.exports = (src, options = {}) => {
   const ast = typeof src === 'string' ? walker.parse(src) : src;
 
   if (options.onFile) {
-    options.onFile({ options, src, ast, walker })
+    options.onFile({ options, src, ast, walker });
   }
 
   walker.walk(ast, (node) => {
@@ -91,7 +91,7 @@ module.exports = (src, options = {}) => {
 
 
   if (options.onAfterFile) {
-    options.onAfterFile({ options, src, ast, walker, dependencies })
+    options.onAfterFile({ options, src, ast, walker, dependencies });
   }
 
   return dependencies;
