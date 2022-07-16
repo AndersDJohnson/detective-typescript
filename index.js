@@ -30,7 +30,13 @@ module.exports = (src, options = {}) => {
 
   const walker = new Walker(walkerOptions);
 
-  walker.walk(src, (node) => {
+  const ast = typeof src === 'string' ? walker.parse(src) : src;
+
+  if (options.onFile) {
+    options.onFile({ options, src, ast, walker })
+  }
+
+  walker.walk(ast, (node) => {
     switch (node.type) {
       case 'ImportExpression':
         if (!options.skipAsyncImports && node.source && node.source.value) {
